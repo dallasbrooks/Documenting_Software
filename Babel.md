@@ -262,7 +262,7 @@ Babel’s business goals represent the expectations and requirements needed to s
 
 ### 2.2 Utility Tree
 
-![Utility Tree](images/utility.png)
+![Utility Tree](img/Utility_Tree.png)
 
 Figure 1. Utility Tree
 
@@ -388,7 +388,7 @@ QAS: Modifiability
 
 A module view shows the elements of Babel, and their relations. This diagram demonstrates what dependencies exist between modules, and which are necessary to Babel. The primary presentation of Babel is built focusing primarily on the quality attribute scenarios from Milestone 2.
 
-![primary presentation](images/primary_presentation.png)
+![primary presentation](img/Module_View.png)
 
 Figure 2. Module View and Primary Presentation Diagram
 
@@ -448,7 +448,7 @@ The eslint-plugin-development module is a tool to enforce a set of rules on Babe
 
 This diagram shows how the Babel application depends on its environment.
 
-![context diagram](images/context.png)
+![context diagram](img/MV_Context.png)
 
 Figure 3. Context Diagram
 
@@ -474,7 +474,7 @@ babel.config.js is a project-wide configuration file for Babel. Babel automatica
 
 script.js is a placeholder name for the JavaScript file that is being transpiled in the example.
 
-![behaviour diagram](images/behaviour.png)
+![behaviour diagram](img/MV_Behaviour.png)
 
 Figure 4. Behaviour Diagram
 
@@ -592,7 +592,7 @@ Most notable in the babel-cli and babel-core modules, Babel 7 offers an improvem
 
 The style used for the component and connector view is Pub-Sub one, which helps better represent the architecture of Babel. Babel relies on the babel-parser component to be more effective and efficient in performing tasks. This primary presentation of Babel is built focusing primarily on the quality attribute scenarios from Milestone 2.
 
-![primary presentation](images/m4_primary_presentation.png)
+![primary presentation](img/Component_Connector.png)
 
 Figure 5. Component & Connector View and Primary Presentation
 
@@ -640,7 +640,7 @@ The JavaScript Path package is a way to interact with files and directories. The
 
 During runtime the only external nodes that interact with ‘babel-parser’ are the ‘babel-core’ and ‘helper-fixtures’ nodes. In both of these cases ‘babel-parser’ is invoked using the method ‘babel-parser.parse(code, [options])’. This method takes the code to be transpiled and an options object as arguments and returns the parsed AST.
 
-![context diagram](images/m4_context.png)
+![context diagram](img/CC_Context.png)
 
 Figure 6. Context Diagram
 
@@ -648,7 +648,7 @@ Figure 6. Context Diagram
 
 The following diagram shows the behaviour of the ‘babel-parser’ when accessed through the ‘parse(code, [options])’ interface. The diagram starts when babel-core calls ‘parse(code, [options])’ where code is the source code to be parsed and ‘[options]’ is a set of optional configurations. The ‘validatePlugins(options.plugins)’ call is only executed if plugins are included in the options object, the purpose of this function is to validate the included plugins. On error ‘validatePlugins’ throws an exception, otherwise returns nothing. Both ‘Parser’ and ‘Options’ in the diagram represents objects of their own respective types. Once the ‘Parser’ object has been initialized, ‘Parser.parse()’ is called which parses the code and returns the parsed abstract syntax tree (AST).
 
-![behaviour diagram](images/m4_behaviour.png)
+![behaviour diagram](img/CC_Behaviour.png)
 
 Figure 7. Behaviour Diagram
 
@@ -795,7 +795,7 @@ This example is easy to follow and shows the power of babel-parser. The arrow fu
 
 SonarQube was used to evaluate Babel’s code quality. SonarQube was helpful in identifying potential technical debt that needs to be addressed. SonarQube is an automated code analysis tool that provides an overview of certain issues such as: identifying bugs, vulnerabilities, code smells, coverage, and duplications within a project. SonarQube also provides a quality gate of whether the project status passes its set of measures in order to be deployable or not. SonarCloud provides its own Quality Gate. A Quality Gate is a set of measure-based boolean conditions, and helps to know if the project is production-ready. The Quality Gate checks the project against reliability, security, maintainability, coverage, and duplications thresholds. In SonarCloud, a bug is "a coding error that will break your code and needs to be fixed immediately,'' security is “code that can be exploited by hackers," maintainability is “the estimated time it will take to fix all code smells,” coverage is “the percentage of lines of code covered by tests,” and duplications which are “identical lines of code.”
 
-![quality gate](images/QualityGate.png)
+![quality gate](img/Quality_Gate.png)
 
 Figure 8. Quality Gate
 
@@ -809,7 +809,7 @@ The SonarCloud instance report can be found here: [https://sonarcloud.io/dashboa
 
 One bug was reported on line 8 in the packages/babel-core/src/config/files/index.js file. The cause of this bug is "Expected an assignment or function call and instead saw an expression." This message was a result of a bug that found an expression, when a function was expected. The comment above line of code that caused the major bug warning starts with “kind of gross […]”, this is an example of deliberately introducing technical debt. This expression works for now, but is hacky and needs to be changed. Some of these are notes for future versions of Babel, SonarCloud found no vulnerabilities, but 36 security hotspots. SonarCloud defines security hotspots as: “Security-sensitive code that requires manual review to assess whether or not a vulnerability may exist.” This implies that the developers in charge of security may need to review these potential vulnerabilities. Most of these security vulnerabilities are making sure that command line arguments are being used safely.
 
-![Bugs and Vulnerabilities](images/SpecificBug.png)
+![Bugs and Vulnerabilities](img/Bugs_Vulnerabilities.png)
 
 Figure 9. Bugs and Vulnerabilities
 
@@ -817,7 +817,7 @@ Figure 9. Bugs and Vulnerabilities
 
 SonarCloud defines "code smells" as “code that is confusing and difficult to maintain.” SonarCloud found 242 code smells in Babel, 5 are block, 47 are minor, 189 are major, and 1 is critical. The blocker code smells were all issues with how switch cases were ended, in the packages/bable-parser/src/tokenizer/index.js file. The minor code smells were primarily suggestions to rename files, while the major code smells were mostly that some variable was already previously defined in an upper scope. The critical code smell was that the default clause needed to be moved to the end of the switch statement. The estimated time to fix a blocker code smell was marked at 10 minutes, a minor code smell was 5 minutes, a major code smell varied from 5 to 30 minutes, and a critical code smell was marked at 5 minutes. SonarCloud estimated that it would take 3 days to fix all found code smells. This isn’t a lot of technical debt, but 195 of all 242 code smells were marked as either blocker, major, or critical, and need to be fixed soon.
 
-![Code Smells](images/CodeSmells.png)
+![Code Smells](img/Code_Smells.png)
 
 Figure 10. Code Smells
 
@@ -829,7 +829,7 @@ SonarCloud’s Quality Gate reported that the coverage was 81.1%, this means tha
 
 Babel was found to have 1.6% duplication, which was 1295 line of duplicated code, or 57 duplicated blocks. Having many duplications in a project may poorly impact the overall performance, as it adds unnecessary compile time. The packages/babel-types/src/validators/generated/index.js file was found to have the highest percentage of duplications in Babel, at 34 duplicated blocks. The next highest percentage of duplication was the packages/babel-preset-env/data/corejs2-built-in-features.js file, with 19 duplicated blocks.
 
-![Duplications](images/Duplications.png)
+![Duplications](img/Duplications.png)
 
 Figure 11. Duplications
 
