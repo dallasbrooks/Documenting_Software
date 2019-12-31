@@ -1,3 +1,5 @@
+# Architectural Analysis of Babel
+
 ## Table of Contents
 
 0. Introduction
